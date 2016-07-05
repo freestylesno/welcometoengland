@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Cost</title>
+		<link href="england_style.css" rel="stylesheet" type="text/css" />
+		<script type = "text/javascript" src = "javascripts/banner.js"></script>
+		<script type="text/javascript">
+			function getTokens() {
+				var QMark = document.URL.indexOf('?');
+				var daytrips = new Array();
+
+				if (QMark != -1){
+					//parse data into array at &
+					var pairsArray = document.URL.substring(QMark+1, document.URL.lenght).split('&');
+
+					// seperate data in strings in to associative array
+					for(var i = 0; i <pairsArray.length; i++){
+						var nameVal = pairsArray[i].split('=');
+						daytrips[nameVal[0]] = nameVal[1];
+					}
+				}
+				return daytrips;
+			}
+		</script>
+	</head>
+	<body onLoad = "changePictures()">
+		<section id = "page"><!-- starts page section -->
+		<p style = "text=align:center">
+			<img src = " images/welcometoengland_text.png" width = "975" height = "100" alt = "welcome to England" title = "welcome to England" />
+						</p>
+		<header> <!--start header -->
+		<div id = "banner">
+			<p style = "text-align: center">
+				<a href = "javascript:imageLink()"><img src "images/london_banner_1.png" name = "Banner" id = "Banner" width = "1000" height = "250" />
+			</p>
+
+		</div>
+			<nav> <!--start nav -->
+				<p style = "text-align:center">
+		<a href = "index.html"> Home</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "london.html"> London</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "daytrips.html"> Day Trips</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "cost.html"> Cost</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "stay.html"> Stay</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "travel.html"> Travel</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "shop.html"> Shop</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "contactus.html"> Contact Us</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		</p>
+			</nav><!--end nav -->
+		</header>
+	
+	<section id = "content"> <!--content section-->
+		
+		<article id = "main"> <!-- start main article -->
+		<script type="text/javascript"> 
+		document.write("<h3>For learning Purposes Only</h3>")
+			var costArray = new Array();
+			costArray["HarryPotter"] = 75;
+			costArray["Cadbury"] = 60;
+			costArray["Ireland"] = 175;
+			costArray["Scotland"] = 125;
+			costArray["Belgium"] = 150;
+
+			daytripsImageArray = new Array("<img src = 'images/HarryPotter.jpg' width = '188' height = '138'  alt = 'HarryPotter  daytrip'>",
+				"<img src = 'images/Cadbury.jpg' width = '188' height = '138' alt = 'Cadbury  daytrip'>",
+				"<img src = 'images/Ireland.jpg' width = '188' height = '138' alt = 'Ireland  daytrip'>",
+				"<img src = 'images/Scotland.jpg' width = '188' height = '138' alt = 'Scotland  daytrip'>",
+				"<img src = 'images/Belgium.jpg' width = '188' height = '138' alt = 'Belgium  daytrip'>");
+
+			function displayPrice(){
+				//get selected trip
+				var ticket = document.getElementById("ticket").value;
+				switch(ticket){
+					case "HarryPotter":
+						var Aticket = costArray["HarryPotter"];
+						var Cticket = Aticket/2;
+						var pic = daytripsImageArray[0];
+					break;
+					case "Cadbury":
+						var Aticket = costArray["Cadbury"];
+						var Cticket = Aticket/2;
+						var pic = daytripsImageArray[1];
+					break;
+					case "Ireland":
+						var Aticket = costArray["Ireland"];
+						var Cticket = Aticket/2;
+						var pic = daytripsImageArray[2];
+					break;
+					case "Scotland":
+						var Aticket = costArray["Scotland"];
+						var Cticket= Aticket/2;
+						var pic = daytripsImageArray[3];
+					break;
+					case "Belgium":
+						var Aticket = costArray["Belgium"];
+						var Cticket = Aticket/2;
+						var pic = daytripsImageArray[4];
+					break;
+
+				}
+				var total = 0;
+				var display = "";
+				//get name
+				var name = document.getElementById("fullname").value;
+				//get child tickt quantity 
+				var Cquantity = document.getElementById("Cquantity").value;
+				//get adult quantity
+				var Aquantity = document.getElementById("Aquantity").value;
+				//calcualte and display prices for childs
+				var Cprice = Cticket * Cquantity;
+				
+				display += name + " checked the price for " + Cquantity + " Child ticket(s) to \"";
+				display += ticket + "\" for $";
+				display += Cprice.toFixed(2);
+				total += Cprice;
+				//calculate and display for Adults
+				var Aprice = Aticket * Aquantity;
+					display += "<br>and " + Aquantity + " Adult ticket(s) to \"";
+				display += ticket + "\" for $";
+				display += Aprice.toFixed(2)+'<br>';
+				total += Aprice;
+				//display total
+				display += "<br>";
+				display += 'Total cost: $' + total.toFixed(2);
+				display += '<p>' + pic + '</p>';
+
+				document.getElementById("myticket").innerHTML=display;
+
+			}
+			
+
+			selDayTripsArray = getTokens();
+
+			var desc = "<p>You have selected the Day Trip to:</p>";
+			desc += "<ul>";
+
+			var totalCost = 0;
+
+			for(key in selDayTripsArray){
+
+				switch(selDayTripsArray[key]){
+					case "HarryPotter":
+					var H_cost = costArray['HarryPotter'];
+					totalCost += H_cost;
+					document.write("<p>The cost for the " + selDayTripsArray[key] + " trip is $" + H_cost + ".00</p>" );
+					desc += ("<li> Harry Potter Studio Tour</li>");
+					break;
+
+					case "Cadbury":
+					var C_cost = costArray['Cadbury'];
+					totalCost += C_cost;
+					document.write("<p>The cost for the " + selDayTripsArray[key] + " trip is $" + C_cost + ".00</p>" );
+					desc += ("<li>Cadbury World</li>");
+					break;
+
+					case "Ireland":
+					var I_cost = costArray['Ireland'];
+					totalCost += I_cost;
+					document.write("<p>The cost for the " + selDayTripsArray[key] + " trip is $" + I_cost + ".00</p>" );
+					desc += ("<li>Ireland</li>");
+					break;
+
+					case "Scotland":
+					var S_cost = costArray['Scotland'];
+					totalCost += S_cost;
+					document.write("<p>The cost for the " + selDayTripsArray[key] + " trip is $" + S_cost + ".00</p>" );
+					desc += ("<li>Scotland</li>");
+					break;
+
+					case "Belgium":
+					var B_cost = costArray['Belgium'];
+					totalCost += B_cost;
+					document.write("<p>The cost for the " + selDayTripsArray[key] + " trip is $" + B_cost + ".00</p>" );
+					desc += ("<li>Belgium</li>");
+					break;
+
+				}
+			}
+		</script>
+		<br><br>
+		<script type="text/javascript">
+		if (totalCost == 0){
+			document.write("<p>You have not selected any Day Trips.</p>");
+			document.write("<p>Please click on the Day Trips tab and select the day trips you would like to take.</p>")
+			document.write("<p>We will calculate the total cost of one adult ticket to each of the attractions you select.</p>")
+		}
+		else{
+			document.write("<p>Your total cost for these trips is $" + totalCost + ".00</p>");
+		}
+		</script>
+		</article>
+		
+		<aside> <!-- starts right article -->
+		<script type="text/javascript">
+		if(totalCost != 0){
+			document.write(desc);
+			document.write("</ul>");
+		}
+
+		</script>	
+		</aside> <!-- ends rt article -->
+
+		<h2 style = "clear: both; text-align:center">
+			Calculate Cost for Family or Friends</h2>
+		<form style = "width:375; float:left; padding-right:200px" name = "tickets" id="tickets">
+			<p> Select Attraction:
+				<select name="ticket" id = "ticket">
+					<option value=""> Select Attraction</option>
+					<option value = "HarryPotter">Harry Potter</option>
+					<option value = "Cadbury">Cadbury</option>
+					<option value = "Ireland">Ireland</option>
+					<option value = "Scotland">Scotland</option>
+					<option value = "Belgium">Belgium</option>
+				</select>
+				</p>
+					<p>Name:<input type="text" name="fullname" id="fullname" value="" /></p>
+					<p>
+						<label for = "Ctickets"> <input type="checkbox" id= "Ctickets" checked />Child tickets: </label>
+						Number of Tickets: <input type="text" id="Cquantity" size="3" />
+					</p>
+					<p>
+						<label for = "Atickets"> <input type="checkbox" id= "Atickets" checked />Adult tickets: </label>
+						Number of Tickets: <input type="text" id="Aquantity" size="3" />
+					</p>
+					<p><input type="button" value="Calculate Cost" onClick="displayPrice()" />
+		</form>
+
+		<div id = "myticket" style = "padding-right:20px">
+
+
+		</div>
+	
+	</section> <!-- ends section -->
+		
+		<div class="push"> </div> <!-- for footer stickied -->
+		
+	</section> <!-- ends section page -->
+	
+	<footer>
+	footer stuff!
+	</footer>
+	
+	</body>
+</html>

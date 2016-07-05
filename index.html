@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Welcome to England</title>
+		<link href="england_style.css" rel="stylesheet" type="text/css" />
+		<script type = "text/javascript" src = "javascripts/jsdate.js"></script>
+		<script type = "text/javascript" src = "javascripts/countdowntotrip.js"></script>
+		<script type = "text/javascript" src = "javascripts/banner.js"></script>
+		<script type = "text/javascript" src = "javascripts/selectlist.js"></script>
+		<script type = "text/javascript" src = "javascripts/homepageslideshow.js"></script>
+		<script type = "text/javascript" src = "javascripts/membershipform.js"></script>
+		<script type = "text/javascript" src = "javascripts/messageform.js"></script>
+		<script type = "text/javascript" src = "javascripts/displayform.js"></script>
+		<script type = "text/javascript" src = "javascripts/welcome_visitor.js"></script>
+	</head>
+	<body onLoad = "changePictures(),scrollMessage(),check_visitor()">
+		<section id = "page"><!-- starts page section -->
+		<p style = "text-align:center">
+			<img src = " images/welcometoengland_text.png" width = "975" height = "100" alt = "welcome to England" title = "welcome to England" />
+						</p>
+		<header> <!--start header -->
+		<div id = "banner">
+			<p style = "text-align: center">
+				<a href = "javascript:imageLink()"><img src = "images/london_banner_1.png" name = "Banner" id = "Banner" width = "1000" height = "250" />
+			</p>
+
+		</div>
+			<nav> <!--start nav -->
+				<p style = "text-align:center">
+		<a href = "index.html"> Home</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "london.html"> London</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "daytrips.html"> Day Trips</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "cost.html"> Cost</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "stay.html"> Stay</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "travel.html"> Travel</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "shop.html"> Shop</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "contactus.html"> Contact Us</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		</p>
+			</nav><!--end nav -->
+		</header>
+	
+	<section id = "content"> <!--content section-->
+		<div id = "welcome">
+		<script type = "text/javascript">
+			//check_visitor();
+		</script>
+		</div>
+		<div id = "vistis">
+			<script type = "text/javascript">
+				var visit = ""; // number of times site has been visited
+				visit = getCookie("VisitNumber");//get stored number of visits
+				if(visit != null){
+					document.write("<h3 style = 'text-align:center'> You have visited this site " + visit + " times. </h3>");
+				}
+			</script>
+		</div>
+
+		<script type = "text/javascript">
+			displayDate();
+		</script>
+		
+		<article id = "main"> <!-- start main article -->
+		<h3>Why go to London?</h3>
+		<p>Tea<br/>
+		Shopping<br/>
+		Theatre<br/>
+		Harry Potter!</p>
+		<br/><br/>
+		<h3> Things to know!</h3>
+		<p>Money<br/>
+		Crossing the street<br/>
+		What time is it? What day are we on?</p>
+		<br/><br/>
+		</article>
+		
+		<aside> <!-- starts right article -->
+			<div>
+		<form name = "slideshow" id = "slideshow">
+			<p style = "text-align: center">
+				<img src="slideshow/ben.jpg" alt ="picture of Big Ben" title = "picture of Big Ben" name =  "display" id = "display"/>
+			</p>
+			<p style = "text-align: center">
+				<input type = "button" name =  "button" id =  "button" value = "First Slide" onClick = "first()"; /> 	
+				<input type = "button" name =  "button" id =  "button" value = "Previous Slide" onClick ="movePrevious()"; />
+				<input type = "button" name =  "button" id =  "button" value = "Next Slide" onClick = "moveNext()"; /> 
+				<input type = "button" name =  "button" id =  "button" value = "Last Slide" onClick = "last()"; /> 
+			</p>
+		</form>
+		<br/>
+
+			</div>
+
+
+		<div id = "countdown"> <!-- countdown div -->
+		<script type = "text/javascript">
+			countdownTrip();
+		</script>
+		</div>
+		</aside> <!-- ends rt article -->
+		<section id = "membership form" style = "margin-right: 25ps;">
+			<form name = "messageForm" id "messageForm">
+				<h2>
+					<input type = "text" name = "myMessage" size = "30" style = "font-size:25px; color: blue"/>
+				</h2>
+			</form>
+
+			<p style = "text-align: center; padding-top: 20px">
+				<a href="javascript:displayForm();" id = "show"> Become a Travel Member</a>
+
+			<form name = "Mform" id = "Mform" action = "mailto:deryck.beliveau@maine.edu" method "post" onSubmit = "return valivateForm()" style = "display:none">
+
+			<h1 style = "padding-bottom: 20px">Membership form</h1></br>
+			<p>This form will give me an idea about who my site visitors are and where they want to go. In turn, I'll  be able to post more information about what you want to see and great places you can go!</p>
+			<p>Please note: All fields are required.</p>
+
+				<p>First Name: <input type = "text" name = "Fname" id = "Fname" size = "25" /> </p>
+				<p>Last Name: <input type = "text" name = "Lname" id = ":name" size = "25" /> </p>
+				<p>Email Address: <input type = "email" name = "Email" id = "Email" size = "40" /> </p>
+				<p>Birthday: <input type ="text" name = "bday" size = "25"/> Format: mm-dd-yyyy </p>
+				<p>
+					<br/><input type = "radio" name = "age" id = "age" value = "Under 12"/>Under 12 &nbsp;&nbsp;
+					<br/><input type = "radio" name = "age" id = "age" value = "12-18"/>12-18 &nbsp;&nbsp;
+					<br/><input type = "radio" name = "age" id = "age" value = "19-30"/>19-30 &nbsp;&nbsp;
+					<br/><input type = "radio" name = "age" id = "age" value = "31-40"/>31-40 &nbsp;&nbsp;
+					<br/><input type = "radio" name = "age" id = "age" value = "41-50"/>41-50 &nbsp;&nbsp;
+					<br/><input type = "radio" name = "age" id = "age" value = "51-60"/>51-60 &nbsp;&nbsp;
+					<br/><input type = "radio" name = "age" id = "age" value = "61- and over"/> 61 and over &nbsp;&nbsp;
+				</p>
+				contries I'd like to visit:
+				<br/><input type = "checkbox" name = "England" id = "England" value = "England"/> England &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Ireland" id = "Ireland" value = "Ireland"/> Ireland &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Scotland" id = "Scotland" value = "Scotland"/> Scotland &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Norway" id = "Norway" value = "Norway"/> Norway &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Sweden" id = "Sweden" value = "Sweden"/> Sweden &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Finland" id = "Finland" value = "Finland"/> Finland &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Germany" id = "Germany" value = "Germany"/> Germany &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Netherlands" id = "Netherlands" value = "Netherlands"/> England &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Belgium" id = "Belgium" value = "Belgium"/> Belgium &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Spain" id = "Spain" value = "Spain"/> Spain &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Switzerland" id = "Switzerland" value = "Switzerland"/> Switzerland &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "France" id = "France" value = "France"/> France &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Itayl" id = "Itayl" value = "Itayl"/> Itayl &nbsp;&nbsp;
+				<br/><input type = "checkbox" name = "Austria" id = "Austria" value = "Austria"/> Austria &nbsp;&nbsp;
+				<p> 
+					<input type = "reset" value = "clear Form" />&nbsp;&nbsp; <input type = "submit" value = "Submit Form"/>
+				</p>
+				<p style = "text-align: center; padding-top: 20px">
+				<a href="javascript:displayForm();" id = "noshow" style = display: "none"> No thanks, I will sign up another time!</a>
+			</form>
+				
+
+	
+	</section> <!-- ends section -->
+		
+		<div class="push"></div> <!-- for footer stickied -->
+		
+	</section> <!-- ends section page -->
+	
+		<footer>
+		<script type = "text/javascript">
+			//get last modified date store as var update
+			var update = document.lastModified;
+			//display the date modified
+			document.write("This page was last modified: " + update);
+		</script>
+		</footer>
+	
+	</body>
+</html>

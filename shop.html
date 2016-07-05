@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Shopping Cart</title>
+		<link href="england_style.css" rel="stylesheet" type="text/css" />
+		<script type = "text/javascript" src = "javascripts/banner.js"></script>
+	
+	</head>
+	<style type = "text/css">
+		html,body
+		{
+			background-color: lightblue;
+		}
+		#OrderForm a:link, #cart a:link
+		{
+			font-size: 14px; 
+		}
+		.center
+		{
+			text-align: center;
+		} 
+		.right
+		{
+			text-align: right;
+		}
+		td.blue
+		{
+			background-color: #4169E1;
+			color: white;
+			font-size: 22px;
+			font-weight: bold;
+			height: 44px;
+		}
+		td p
+		{
+			padding-top: 25px;
+			padding-bottom: 25px;
+			color: navy;
+			font-size: 18px;
+		}
+		td.pad
+		{
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+		#cartTable tr
+		{
+			height: 50px;
+		}
+		input
+		{
+			background-color: #4169E1;
+			color: white;
+			padding: 10px;
+			font-weight: bold;
+			border-radius: 10px;
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+		}
+		#cartTable
+		{
+			margin-left: 12.5%;
+			margin-right: 12.5%;
+			
+		}
+	</style>
+
+	<script type="text/javascript">
+	var totalPrice = 0;
+
+	function addToCart(item,quantity,price){
+		//get elements in tbody for "cart"
+		var cart = document.getElementById("cartLineItems");
+		//create table row
+		var row = document.createElement("tr");
+		//create an id attribute with a value of the item + _cartRow
+		row.setAttribute("id", item + '_cartRow');
+		//create a table data cell
+		var td1 = document.createElement("td");
+		td1.setAttribute("width", '60%');
+		td1.appendChild(document.createTextNode(" " + item + " (" + price + ") "));
+		//create link
+		var href = document.createElement("a");
+		href.setAttribute("href", "JavaScript:removeFromCart('" + item + "');");
+		href.appendChild(document.createTextNode(' Remove Item '));
+		//add the hyperlink to the td tag
+		td1.appendChild(href);
+		//add td to the row
+		row.appendChild(td1);
+
+		//create second table cell for quantity
+		var td2 = document.createElement('td');
+		td2.setAttribute('id',item + '_quantity');
+		td2.setAttribute('style','text-align:right; padding-right: 5px');
+		td2.setAttribute('width', item + '10%');
+		td2.appendChild(document.createTextNode(quantity));
+		row.appendChild(td2);
+		cart.appendChild(row);
+		//create table data for price and appended to cart
+		var td3 = document.createElement('td');
+		td3.setAttribute('id', item + '_price');
+		td3.setAttribute('style', 'text-align:right; padding-right: 5px');
+		td3.setAttribute('width', item + '20px');
+		var priceTotal = (price*quantity);
+		var fpriceTotal = priceTotal.toFixed(2);
+		td3.appendChild(document.createTextNode(fpriceTotal));
+		row.appendChild(td3);
+		cart.appendChild(row);
+
+		//set the cart total and updating current total with new item formatted to 2 decimals
+		var total = document.getElementById("cartTotal");
+		totalPrice = totalPrice+price*quantity;
+		ftotalPrice = totalPrice.toFixed(2);
+
+		var newtotal = document.createElement('td');
+		newtotal.setAttribute('style', 'text-align:right; padding-right: 5px');
+		newtotal.setAttribute('id','cartTotal');
+		//appends a $ to the total
+		newtotal.appendChild(document.createTextNode("$"));
+		newtotal.appendChild(document.createTextNode(ftotalPrice + ' '));
+		total.parentNode.replaceChild(newtotal,total);
+
+		alert(item + " has been added to your cart.");
+
+	}
+	function removeFromCart(id){
+		//get data from document
+		var element = document.getElementById(id + '_cartRow');
+		var total =  document.getElementById("cartTotal");
+		var price = parseFloat(document.getElementById(id + "_price").innerHTML);
+		//update data
+		totalPrice -= price;
+		ftotalPrice = totalPrice.toFixed(2);
+		total.innerHTML = '$' + ftotalPrice + '';
+		// actually remove item
+		element.parentNode.removeChild(element);
+	}
+	function viewCart(){
+		document.getElementById('cart').style.display = 'block';
+	}
+  			 
+	function printOrder(){
+		//variables for date from user
+		var Name = "";
+		var CustomerAcctNum = "";
+		var PhoneNumber = "";
+		var ShipToName = "";
+		var ShipToStreet = "";
+		var ShipToCity = "";
+		var ShipToState = "";
+		var ShipToZip = "";
+
+		//prompt for info from user
+		Name = prompt("Enter your name: ", "");
+		CustomerAcctNum = prompt("Enter your customer Account Number: ", "");
+		PhoneNumber = prompt("Enter your phone number: ", "");
+		ShipToName = prompt("Enter the full name of the person to ship to: ", "");
+		ShipToStreet = prompt("Enter Street to ship to: ", "");
+		ShipToCity = prompt("Enter City to ship to: ", "");
+		ShipToState = prompt("Enter State to ship to: ", "");
+		ShipToZip = prompt("Enter Zip to ship to: ", "");
+		var display_setting="toolbar = yes, location = no, directies=yes,menubar=yes,";
+		display_setting+="scrollbar=yes,width=650, height=600, left=100, top=25";
+		var content_value = document.getElementById("cart").innerHTML;
+
+		var docprint=window.open("","",display_setting);
+		docprint.document.open();
+		docprint.document.write('<html><head><title>Shop England OrderForm</title>');
+		docprint.document.write('Thank you for placing an order with BuyEngland.en');
+		docprint.document.write('<style> input { display:none } #nonprint {display:none }</style>');
+		docprint.document.write('</head><body onLoad="self.print()"><center>');
+		docprint.document.write("<h1 style = 'text-align:center'>Buy England Order Form </h1><p style = 'text-align:center'>Thank you for Shopping at Buy England</p><p>"+ Name + "</p><p>" + CustomerAcctNum+"</p><p>" + PhoneNumber + "</p></center>");
+		docprint.document.write("<p> Shipping information</p><p> Ship To: " + ShipToName + "</p><p>Ship To Street: " + ShipToStreet + "</p><p> Ship To City: " +ShipToCity + " </p> <p>Ship To State " + ShipToState + "</p><p>Ship to Zip: " + ShipToZip + "</p>");
+		docprint.document.write(content_value);
+		docprint.document.write('</body></html>');
+		docprint.document.close();
+		docprint.focus
+
+	}
+	</script>
+
+	<body onLoad = "changePictures()">
+		<section id = "page"><!-- starts page section -->
+		<p style = "text=align:center">
+			<img src = " images/welcometoengland_text.png" width = "975" height = "100" alt = "welcome to England" title = "welcome to England" />
+						</p>
+		<header> <!--start header -->
+		<div id = "banner">
+			<p style = "text-align: center">
+				<a href = "javascript:imageLink()"><img src "images/london_banner_1.png" name = "Banner" id = "Banner" width = "1000" height = "250" />
+			</p>
+
+		</div>
+			<nav> <!--start nav -->
+				<p style = "text-align:center">
+		<a href = "index.html"> Home</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "london.html"> London</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "daytrips.html"> Day Trips</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "cost.html"> Cost</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "stay.html"> Stay</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "travel.html"> Travel</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "shop.html"> Shop</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "contactus.html"> Contact Us</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		</p>
+			</nav><!--end nav -->
+		</header>
+	<section id = "content"> <!--content section-->
+		
+		<div id = "main"> <!-- start main article -->
+		<h2 class = "center">Purchase an England Souvenir<h2>
+
+			<div class = "center">
+				<form id="OrderForm" name = "OrderForm">
+					<p style = "padding-bottom: 20px; padding-top: 20px"><a href="Javascript:viewCart();">View Shopping Cart</a></p>
+						<table border ="1" cellspacing = "1" cellpadding = "3" width = "95%">
+
+							<!--PRODUCT 1-->
+						<tr>
+							<td class = "blue" colspan = "3"> LONDON MUG</td>
+						</tr>
+						<tr>
+							<td class = "pad">Price
+								<br>$9.99</td>
+								<td><p>White mug with a picture of London Eye</p>
+									<img src = "images/Eye've_Seen_London_Mug.png" width = "100px" height = "100px">
+									<br>
+								</td>
+								<td class = "pad">
+									Quantity
+
+									<p style = "display: block; margin-top: -10px;">
+										<select name = "quantityMug" id = "quantityMug" size = "1">
+											<option value = '1' selected = "selected">1</option>
+											<option value = '2'>2</option>
+											<option value = '3'>3</option>
+										</select>
+									</p>
+									<a href="JavaScript:changeQtyMug()">Add to Cart</a>
+
+									<!---->
+									<script type="text/javascript">
+									function changeQtyMug() {
+										var quantity = document.getElementById("quantityMug").value;
+										addToCart('LondonMug',quantity,9.99);
+									}
+									</script>
+								</td>
+							</tr>
+								<tr>
+								<!--PRODUCT 2-->
+							<td class = "blue" colspan = "3"> HARRY POTTER BAG</td>
+						</tr>
+						<tr>
+							<td class = "pad">Price
+								<br>$19.99</td>
+								<td><p>Tan Canvas with image of Harry Potter</p>
+									<img src = "images/HP_canvas_bag.png" width = "100px" height = "100px">
+									<br>
+								</td>
+								<td class = "pad">
+									Quantity
+
+									<p style = "display: block; margin-top: -10px;">
+										<select name = "quantityBag" id = "quantityBag" size = "1">
+											<option value = '1' selected = "selected">1</option>
+											<option value = '2'>2</option>
+											<option value = '3'>3</option>
+										</select>
+									</p>
+									<a href="JavaScript:changeQtyBag()">Add to Cart</a>
+
+									<!---->
+									<script type="text/javascript">
+									function changeQtyBag() {
+										var quantity = document.getElementById("quantityBag").value;
+										addToCart('LondonBag',quantity,19.99);
+									}
+									</script>
+								</td>
+							</tr>
+							<!--PRODUCT 3-->
+								<tr>
+							<td class = "blue" colspan = "3"> LONDON TOURIST MAP</td>
+						</tr>
+						<tr>
+							<td class = "pad">Price
+								<br>$14.99</td>
+								<td><p>Tourist map of attractions in London</p>
+									<img src = "images/london_Map.png" width = "100px" height = "100px">
+									<br>
+								</td>
+								<td class = "pad">
+									Quantity
+
+									<p style = "display: block; margin-top: -10px;">
+										<select name = "quantityMap" id = "quantityMap" size = "1">
+											<option value = '1' selected = "selected">1</option>
+											<option value = '2'>2</option>
+											<option value = '3'>3</option>
+										</select>
+									</p>
+									<a href="JavaScript:changeQtyMap()">Add to Cart</a>
+
+									<!---->
+									<script type="text/javascript">
+									function changeQtyMap() {
+										var quantity = document.getElementById("quantityMap").value;
+										addToCart('LondonMap',quantity,14.99);
+									}
+									</script>
+								</td>
+							</tr>
+							<!--PRODUCT 4-->
+								<tr>
+							<td class = "blue" colspan = "3"> LONDON TEAS</td>
+						</tr>
+						<tr>
+							<td class = "pad">Price
+								<br>$12.95</td>
+								<td><p>A taste of the teas that make london famous</p>
+									<img src = "images/london_tea.png" width = "100px" height = "100px">
+									<br>
+								</td>
+								<td class = "pad">
+									Quantity
+
+									<p style = "display: block; margin-top: -10px;">
+										<select name = "quantityTeas" id = "quantityTeas" size = "1">
+											<option value = '1' selected = "selected">1</option>
+											<option value = '2'>2</option>
+											<option value = '3'>3</option>
+										</select>
+									</p>
+									<a href="JavaScript:changeQtyTeas()">Add to Cart</a>
+
+									<!---->
+									<script type="text/javascript">
+									function changeQtyTeas() {
+										var quantity = document.getElementById("quantityTeas").value;
+										addToCart('LondonTeas',quantity,12.95);
+									}
+									</script>
+								</td>
+							</tr>
+							<!--PRODUCT 5-->
+								<tr>
+							<td class = "blue" colspan = "3"> LONDON ALBUM</td>
+						</tr>
+						<tr>
+							<td class = "pad">Price
+								<br>$24.95</td>
+								<td><p>Pictures of London attractions in an acid-free binder</p>
+									<img src = "images/england_album_1.png" width = "100px" height = "100px">
+									<br>
+								</td>
+								<td class = "pad">
+									Quantity
+
+									<p style = "display: block; margin-top: -10px;">
+										<select name = "quantityAlbum" id = "quantityAlbum" size = "1">
+											<option value = '1' selected = "selected">1</option>
+											<option value = '2'>2</option>
+											<option value = '3'>3</option>
+										</select>
+									</p>
+									<a href="JavaScript:changeQtyAlbum()">Add to Cart</a>
+
+									<!---->
+									<script type="text/javascript">
+									function changeQtyAlbum() {
+										var quantity = document.getElementById("quantityAlbum").value;
+										addToCart('LondonAlbum',quantity,24.95);
+									}
+									</script>
+								</td>
+							</tr>
+						</table>
+					</form>
+				E-mail us for more information: <a href="mailto:shopEngland@buy.eu"><span style = "font-size: 12px; color: blue; font-family:Aril, SansSerif;"> shopEngland@buy.en</span></a>
+				<br><br>
+			</div>
+
+		</div>
+		
+		<aside> <!-- starts right article -->
+		<p> When you have finished shopping, print your order and fax it to 555-555-5555</p>
+			<div id ="cart" style = "display: none; margin-top; 30px;">
+				<form>
+					<br>
+					<br>
+					<div id = "center">
+						<table id ="cartTable" boarder = "2" width = "75%">
+							<thead>
+								<tr>
+									<th colspan = "3" style = "color: rgb(233,8,12); font-size: 20px"> Shopping Cart</th>
+								</tr>
+							</thead>
+							<tbody id = "cartLineItems">
+							<tr>
+									<th width = "63%">Item</th>
+									<th width = "10%"> Gty</th>
+									<th width = "17%"> Price</th>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan = '2' style = "text-align:right; padding-right: 10px;">Total</td>
+										<td id="cartTotal" style= 'text-align: right;'></td>
+									</tr>
+									<tr class = "input">
+										<td colspan = '3' style = "text-align:center"><input type = "button" value = "Buy Now" onClick = "Javascript:printOrder()"/></td>
+										</tr>
+							</tfoot>
+						</table>
+					</div>
+				</form>
+			</div>
+		</aside> <!-- ends rt article -->
+	
+	</section> <!-- ends section -->
+		
+		<div class="push"> </div> <!-- for footer stickied -->
+		
+	</section> <!-- ends section page -->
+	
+	<footer>
+	footer stuff!
+	</footer>
+	
+	</body>
+</html>

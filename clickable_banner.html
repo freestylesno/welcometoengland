@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+			<script type = "text/javascript">
+			var englandBanner =  new Array("images/view_from_stpauls.png","images/london_banner_1.png","images/london_night.png");
+			var i = 0;
+			//cycle though banner one image at a time repeatidly. with 3 second wait.
+			function changePictures(){
+				if (i == englandBanner.length){
+					i = 0
+				}
+
+				document.Banner.src =  englandBanner[i];
+				i++;
+				//set time out befor rerunning to 3 seconds... not really sure 100% what this is doing :/
+				setTimeout("changePictures()",3000);
+				
+			}
+			/*
+			function imageLink(){
+				var url = "";
+					if (i == 1){
+						url = "http://www.stpaul.co.uk/visits-Events";
+					}
+					else if (i == 2){
+						url = "https://www.visitlondon.com";
+
+					}
+					else{
+						url = "http://www.harrods.com/content/the-store/visitin-the-store";
+					}
+					window.location = url;
+
+			}
+			*/
+			function imageLink(){
+				var url = "";
+				switch(i){	
+					case 1:
+						url = "http://www.stpaul.co.uk/visits-Events";
+						break;
+					case 2:
+						url = "https://www.visitlondon.com";
+						break;
+					case 3: 
+						url = "http://www.harrods.com/content/the-store/visitin-the-store";
+						break;
+					}
+					window.location = url;
+			}
+			</script>
+		
+	</head>
+	<body onLoad = "changePictures();">
+		<p style = "text-align: center">
+				<a href = "javascript:imageLink()"><img src "images/london_banner_1.png" name = "Banner" id = "Banner" />
+		</p>
+<!-- >
+for script in body
+		<script type = "text/javascript">
+		
+		</script>
+<!-->
+
+	</body>
+</html>

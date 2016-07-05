@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>London</title>
+		<link href="england_style.css" rel="stylesheet" type="text/css" />
+		<script type = "text/javascript" src = "javascripts/londontime.js"></script>
+		<script type = "text/javascript" src = "javascripts/banner.js"></script>
+		<script type = "text/javascript" src = "javascripts/selectlist.js"></script>
+		<script type = "text/javascript" src = "javascripts/cookies.js"></script>
+		<script type = "text/javascript" src = "javascripts/attractions.js"></script>
+		<script type="text/javascript">
+			function updateValues(){
+				if(document.getElementById("TravellerName") != null && document.getElementById("TravellerName").value != ""){
+					addCookie("TravellerName", document.getElementById("TravellerName").value);
+					
+					var attractions = document.getElementById("Attractions").children;
+					
+					var i = attractions.length;
+					while (i--){
+						if (attractions[i].children[0].value != null && attractions[i].children[0].value != "")
+							addCookie(attractions[i].children[0].name, attractions[i].children[0].checked);
+					}
+				}
+			}
+
+		</script>
+	
+		<style type = "text/css">
+		#Ltime
+			{
+				margin-top: 250px;
+				text-align: right;
+			}	
+			#left
+			{
+				width: 200px;
+				float: left;
+				margin-right: 20px;
+			}
+			#main
+			{
+				width: 350px;
+				float: left;
+				margin-right:  20px;
+			}
+			aside
+			{
+				width: 350px;
+				float: left;
+				margin-right:  20px;
+			}
+			h3
+			{
+				padding-bottom: 25px;
+			}
+			.center
+			{
+				text-align: center;
+			}
+			p.links a
+			{
+				font-size: 18px;
+			}
+		</style>
+	</head>
+
+	
+		<body onLoad = "setInterval('displayLondonTime()',1000),changePictures()">
+		<section id = "page"><!-- starts page section -->
+		<p style = "text=align:center">
+			<img src = " images/welcometoengland_text.png" width = "975" height = "100" alt = "welcome to England" title = "welcome to England" />
+						</p>
+		<header> <!--start header -->
+	<div id = "banner">
+			<p style = "text-align: center">
+				<a href = "javascript:imageLink()"><img src = "images/london_banner_1.png" name = "Banner" id = "Banner" width = "1000" height = "250" />
+			</p>
+
+		</div>
+			<nav> <!--start nav -->
+		<p style = "text-align:center">
+		<a href = "index.html"> Home</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "london.html"> London</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "daytrips.html"> Day Trips</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "cost.html"> Cost</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "stay.html"> Stay</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "travel.html"> Travel</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "shop.html"> Shop</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "contactus.html"> Contact Us</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		</p>
+			</nav><!--end nav -->
+		</header>
+	<section id = "content"> <!--content section-->
+		<div id = "left">
+			<p class = "center"><strong>Attraction Links</strong></p>
+			
+			<script type="text/javascript">
+			function AttractionArray(len){
+				var i=0;
+				var retval = new Array(len);
+				for (i=0; i<len; i++)
+					retval[i]=0;
+				return retval;
+				
+			}
+			function addAttraction(AttractionName,PopupName,Cookie){
+				var retval=new Object();
+
+				retval.AttractionName = AttractionName;
+				retval.PopupName = PopupName;
+				retval.Cookie = Cookie;
+				return retval
+			}
+			var totAttractions = 12;
+			var Attractions = AttractionArray(totAttractions);
+
+			Attractions[0]= new addAttraction("London Zoo","LondonZoo","Attraction1");
+			Attractions[1]= new addAttraction("Big Ben","BigBen","Attraction2");
+			Attractions[2]= new addAttraction("St. Paul's Cathedral","St_Pauls_Cathedral","Attraction3");
+			Attractions[3]= new addAttraction("Tower of London","Tower_of_London","Attraction4");
+			Attractions[4]= new addAttraction("British Museum","British_Museum","Attraction5");
+			Attractions[5]= new addAttraction("London Eye","London_Eye","Attraction6");
+			Attractions[6]= new addAttraction("London Aquarium","London_Aquarium","Attraction7");
+			Attractions[7]= new addAttraction("Westminster Abbey"," Westminster_Abbey","Attraction8");
+			Attractions[8]= new addAttraction("Thames River Cruse","Thames_River_Cruse","Attraction9");
+			Attractions[9]= new addAttraction("Wellington Arch","Wellington_Arch","Attraction10");
+			Attractions[10]= new addAttraction("Harrods","Harrods","Attraction11");
+			Attractions[11]= new addAttraction("Shopping","Shopping","Attraction12");
+			
+			function InitializeValues(){
+				var cookieValue = "";
+				cookieValue = getCookie("TravellerName");
+				if (cookieValue != null)
+					document.attractionSelector.TravellerName.value = cookieValue;
+
+				var numElements = document.attractionSelector.elements.length;
+
+				for (var i=1; i<numElements - 2; i++){
+					cookieValue ="";
+					cookieValue = getCookie(document.attractionSelector.elements[i].name);
+
+					if(cookieValue != null){
+						
+						if(cookieValue == "true"){
+							
+							document.attractionSelector.elements[i].checked = true;
+						}
+						if(cookieValue == "false"){
+							document.attractionSelector.elements[i].checked = false;
+						}
+					}
+				}
+			}
+
+			function showForm(){
+				document.getElementById('editform').style.display = 'block';
+				InitializeValues();
+			}
+
+			var cookieValue = "";
+			cookieValue = getCookie("TravellerName");
+				if (cookieValue != null)
+					{
+
+						document.write("<p class = 'center'> <strong>for " + cookieValue + "</strong>");
+						document.write("<br>");
+					}
+
+				for (i=0; i<totAttractions; i++){
+
+					cookieValue = "";
+					cookieValue = getCookie(Attractions[i].Cookie);
+					if (cookieValue != null){
+						
+						if (cookieValue == "true"){
+						
+							document.write("<p class = 'links'> <a href='#' onClick='" + Attractions[i].PopupName + "()'>" + Attractions[i].AttractionName + "</a></p>");
+						}
+					}
+				}
+
+			</script>
+			<p style = "padding-top: 50px;">
+				If you have already visited some of the attractions and would like to add additional attractions to your links List, click the following link:
+			</p>
+			<p class "links" style = "padding-top:50px; text-align: center">
+				<a href = "Javascript:showForm();">Select Attractions</a>
+			</p>
+		</div>
+
+		<article id = "main"> <!-- start main article -->
+		<h3 class = "center"> Welcome to the london Attraction Page </h3>
+		<p>
+			As a current member of the International Travel Club, you may Select the attractions you would like to visit and we will keep you updated with travel tips. When you click the London tab, you will only see links to attractions you would like to visit. 
+		</p>
+				<form id = "editform" name = "attractionSelector" id = "attractionSelector" onSubmit = "return updateValues()" onReset = "return deleteCookie()" style = "display:none">
+			<p> Please enter your full name in the Name textbox and place a checkmark in the attractions you would like to visit </p>
+			<br>
+			<p>
+				Click the selection Attractions button and links to your personal attractions will display on the left each time you visit this page.<p>
+				<br><br>
+				<p class =  "center">
+					<ul>
+						<li style = "list-style-type: none;">
+							Full Name:
+								<input type = "text" size = "20" name = "TravellerName" id = "TravellerName" />
+							</li>
+						</ul>
+						<br> 
+
+						<ul id = "Attractions" style = "list-style-type: none;">
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction1" id = "Attraction1" /> London Zoo</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction2" id = "Attraction2" /> Big Ben</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction3" id = "Attraction3" /> St. Paul's Cathedral</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction4" id = "Attraction4" /> Tower of London</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction5" id = "Attraction5" /> British Museum</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction6" id = "Attraction6" /> London Eye</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction7" id = "Attraction7" /> London Aquarium</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction8" id = "Attraction8" /> Westminster Abbey</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction9" id = "Attraction9" /> Thames River Cruse</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction10" id = "Attraction10" /> Wellington Arch</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction11" id = "Attraction11" /> Harrods</li>
+							<li> <input type = "checkbox" class = "Attraction" name = "Attraction12" id = "Attraction12" /> Shopping</li>
+						</ul>
+
+
+						<input type  = "submit" id = "Selections" name = "Selections" value = "Select Attractions"/>
+						<input type = "reset" name = "Reset" value = "Clear Selections" />
+		</form>
+		</article>
+
+
+		
+		<aside> <!-- starts right article -->
+			<div id = "londonTime">
+				<form name = "Lclock" id = "Lclock" action = "#">
+					<p>
+						<input type = "text" id = "Ltime" name = "Ltime" size = "39" align =  "right"/>
+					</p>
+		
+				</form>
+			
+			</div>	
+			<form name = "Attractions">
+			<table width = "80%">
+				<tr>
+					<td colspan = "2" style = "text-align:center">
+						<h3>Select an item from the list to display and description of the attreaction.</h3>
+					</td>
+				</tr>
+				<tr> 
+					<td style ="verticle-align:text-top">
+						<select name = "attractionList" size = "1" onchange = "displayImages()">
+						<option value = "0">Select an attraction </option>
+						<option value = "1">London Zoo</option>
+						<option value = "2">St. Paul' Cathedral</option>
+						<option value = "3">Tower of London</option>
+						<option value = "4">British Museum</option>
+						<option value = "5">London Eye</option>
+						<option value = "6">London Aquarium</option>
+						<option value = "7">Westminster Abbey </option>
+						<option value = "8">Themes River Cruise</option>
+						<option value = "9">All Hallows Church</option>
+					</select>
+				</tr>
+					</br>
+					</td>
+					<td style = "text-align:center">
+					
+						<img src="slideshow/placeholder.jpg" name = "attractionPicture">
+						<br/><br/>
+						<textarea cols = "38" rows = "10" wrap = "virtual" name = "attractionDescription">
+							When you make a selection from the list, a complete description and the price will display in this window.
+						</textarea>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+		</aside> <!-- ends rt article -->
+	
+	</section> <!-- ends section -->
+		
+		<div class="push"> </div> <!-- for footer stickied -->
+		
+	</section> <!-- ends section page -->
+	
+	<footer>
+	
+	</footer>
+	
+	</body>
+</html>

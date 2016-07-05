@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Stay</title>
+		<link href="england_style.css" rel="stylesheet" type="text/css" />
+		<script type = "text/javascript" src = "javascripts/banner.js"></script>
+		<script type = "text/javascript" src = "javascripts/accordion_menu.js"></script>
+		
+		<style type = "text/css">
+
+			.menu
+			{
+				display: none;
+				margin-left: 15px;
+			}
+			#main
+			{
+				width: 400px;
+			}
+			aside
+			{
+				width: 550px;
+			}
+		</style>
+	</head>
+	<body onLoad = "changePictures()">
+		<section id = "page"><!-- starts page section -->
+		<p style = "text=align:center">
+			<img src = " images/welcometoengland_text.png" width = "975" height = "100" alt = "welcome to England" title = "welcome to England" />
+						</p>
+		<header> <!--start header -->
+		<div id = "banner">
+			<p style = "text-align: center">
+				<a href = "javascript:imageLink()"><img src "images/london_banner_1.png" name = "Banner" id = "Banner" width = "1000" height = "250" />
+			</p>
+
+		</div>
+			<nav> <!--start nav -->
+				<p style = "text-align:center">
+		<a href = "index.html"> Home</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "london.html"> London</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "daytrips.html"> Day Trips</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "cost.html"> Cost</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "stay.html"> Stay</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "travel.html"> Travel</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "shop.html"> Shop</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href = "contactus.html"> Contact Us</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		</p>
+			</nav><!--end nav -->
+		</header>
+	
+	<section id = "content"> <!--content section-->
+		
+		<article id = "main"> <!-- start main article -->
+		<!--Accordion menue goes here -->
+		<h1>Places to stay</h1>
+		<br>
+		<h4 style = "text-align: center; padding-bottom: 15px;"> Content of Places to stay from respoected Web sites <br> (For Learning Purposes Only)</h4>
+
+
+			<h4><a href = "stay.html" onClick = "return switchMenu('menu1')">Hotels</a></h4>
+			<span class = "menu" id = "menu1">
+				<p style "text-indent: 10px"><a href = "the_cromwell.html"> Best Western - The Cromwell</a></p>
+				<p style "text-indent: 10px"><a href = "express_southwark.html">Express By Holiday Inn - Southwark</a></p>
+				<p style "text-indent: 10px"><a href = "days_hydepark.html">Days In - Hyde Park</a></p>
+			</span>
+			<br>
+			<h4><a href = "stay.html" onClick = "return switchMenu('menu2')">Hostels</a></h4>
+			<span class = "menu" id = "menu2">
+				<p style "text-indent: 10px"><a href = "yha_oxford.html">YHA - Oxford Street </a></p>
+				<p style "text-indent: 10px"><a href = "yha_center.html">YHA - Central</a></p>
+				<p style "text-indent: 10px"><a href = "yha_stpancras.html">YHA - St. Pancras </a></p>
+			</span>
+			<br>
+			<h4><a href = "stay.html" onClick = "return switchMenu('menu3')">Bed and Breakfasts</a></h4>
+			<span class = "menu" id = "menu3">
+				<p style "text-indent: 10px"><a href = "arran_house.html">Arran House</a></p>
+				<p style "text-indent: 10px"><a href = "the_sumner.html">The Sumner</a></p>
+				<p style "text-indent: 10px"><a href = "americana.html">Americana</a></p>
+		</article>
+		
+		<aside> <!-- starts right article -->
+			<!--overvies of places to stay will go here-->	
+		<h1>Express by Holiday Inn - Southwark</h1>
+<img src = "images/expresssouthwark.jpg" alt = "image of Express - Southwark" width = "400" height = "233" title = " The Express - Southwark"/> <br/>
+<strong>Location:</strong> 103-109 Southwark Street  London , SE1 0JQ  England <br/>
+<strong>Website:</strong> Express by Holiday Inn - <a href = "http://www.ihg.com/holidayinnexpress/hotels/us/en/london/lonsw/hoteldetail"> Southwark</a> <br/><br/>
+
+Make the Holiday Inn Express London-Southwark hotel your base for a buzzing central London location and excellent transport links.<br/><br/>
+
+Friendly staff welcomes you on your arrival at our intimate 88-room hotel near London's cosmopolitan South Bank. Holiday Inn Express London-Southwark is a short walk from Southwark Underground Station and Blackfriars Network Rail Station with direct train services to Gatwick and Luton Airports. Settle into your air-conditioned Guest room, decorated in contemporary colors, and start each day with a complimentary breakfast in our lively Great Room.<br/><br/>
+
+Getting around London is easy with London Bridge and Waterloo stations just a short stroll from the hotel. Cross Blackfriars Bridge to get to the London Stock Exchange, Royal Courts of Justice and Bank of England.<br/><br/>
+
+We're just minutes from the lively cafes, theatres and galleries that dot London's trendy South Bank. Walk along the River Thames to the Tate Modern gallery, housed in a converted power station, or stroll over the futuristic Millennium Bridge to elegant St Paul's Cathedral. Why not stop by Borought Market for food tasting en route to the Shard.<br/><br/>
+
+Holiday Inn Express London-Southwark's central location puts chic bars and restaurants on your doorstep. Ask staff to recommend their favourites or do your own research via free wireless Internet in our open-plan Lobby.<br/><br/>
+
+		</aside> <!-- ends rt article -->
+	
+	</section> <!-- ends section -->
+		
+		<div class="push"> </div> <!-- for footer stickied -->
+		
+	</section> <!-- ends section page -->
+	
+	<footer>
+	footer stuff!
+	</footer>
+	
+	</body>
+</html>
